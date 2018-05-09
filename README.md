@@ -13,6 +13,8 @@ Copy this folder into the same directory with your theme. [Install](#install) al
 ...
 ```
 
+And [Browsersync](#browsersync) config to your choice.
+
 From the command line on your host machine, navigate to the gulp-dev directory then run
 ```
 $ gulp
@@ -48,7 +50,7 @@ $ npm install
   - `--patch` version when you make backwards-compatible bug fixes
   - `--to` allows you to define a custom version number, e.g. `gulp bump --to 0.1.0`
 
-## Using Browsersync
+## <a name="browsersync"></a>Using Browsersync
 To use Browsersync you need to update the proxy URL in `gulpfile.js` under `watch` task to reflect your local development hostname.
 
 If your local development URL is `my-site`, update the file to read:
@@ -56,6 +58,14 @@ If your local development URL is `my-site`, update the file to read:
 ```javascript
 ...
   proxy: 'localhost/my-site',
+...
+```
+
+You can also update to use your favorious browser. For instance, I'm using Firefox Developer on Mac OS so I need to update the path to my app under applications folder. For more information check out [BrowserSync documentation](https://browsersync.io/docs/options#option-browser)
+
+```javascript
+...
+browser: '/Applications/Firefox\ Developer\ Edition.app'
 ...
 ```
 

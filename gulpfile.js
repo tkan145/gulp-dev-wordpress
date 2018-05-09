@@ -13,6 +13,7 @@ var themename = '',
 // Dependencies
 var args        = require('yargs').argv,
     autoprefixer= require('autoprefixer'),
+    babel       = require("gulp-babel"),
     browsersync = require('browser-sync'),
     bump        = require('gulp-bump'),
     cache       = require('gulp-cached'),
@@ -138,7 +139,15 @@ gulp.task('scripts', function() {
         // Notify on error.
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: <%= error.message %>")
-		}))
+        }))
+
+        // Source maps init
+        .pipe(sourcemaps.init())
+        
+        // Using babel to transpile ES6 
+        .pipe(babel({
+            "presets": ["env"]
+        }))
         
         // Cache files to avoid processing files that haven't changed.
         .pipe(cache('scripts'))
@@ -150,6 +159,8 @@ gulp.task('scripts', function() {
         
         // Minify.
 		.pipe(uglify())
+
+        .pipe(sourcemaps.write())
 
 		// Output the processed js to this directory.
         .pipe(gulp.dest('assets/scripts/min'))
